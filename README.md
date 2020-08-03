@@ -1,2 +1,1 @@
-# twoshamas.com
-Website for twoshamas.com
+# Personal online resume for acevedomiguel.com
