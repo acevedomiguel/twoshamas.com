@@ -1,8 +1,8 @@
 ############################ Default configuration #########################
-baseURL = "https://www.acevedommiguel.com/"
+baseURL = "https://www.twoshamas.com/"
 languageCode = "en-us"
 # site title 
-title = "Personal Resume for Acevedo Miguel Angel | acevedomiguel.com"
+title = "twoshamas.com - Coming Soon"
 # theme
 theme = "twoshamas"
 
