@@ -30,11 +30,23 @@ jobs:
       uses: lowply/build-hugo@v0.72.0
 
     - name: rsync deployments
-      uses: burnett01/rsync-deployments@4.1
-      with:
-        switches: -avzr --delete
-        path: public/
+      run: |
+        mkdir ~/.ssh
+        echo "$remote_key" > ~/.ssh/gh_actions_key
+        chmod 600 ~/.ssh/gh_actions_key
+        rsync -avz --exclude '.git' --exclude '.well-known' -e "ssh -i ~/.ssh/gh_actions_key -o StrictHostKeyChecking=no" public/ $remote_user@$remote_host:$remote_path
+      env:
         remote_path: ${{ secrets.TESTING_REMOTE_PATH }}
         remote_host: ${{ secrets.TESTING_REMOTE_HOST }}
         remote_user: ${{ secrets.TESTING_REMOTE_USER }}
         remote_key: ${{ secrets.TESTING_DEPLOY_KEY }}
+
+    # - name: rsync deployments
+    #   uses: burnett01/rsync-deployments@4.1
+    #   with:
+    #     switches: -avzr --delete
+    #     path: public/
+    #     remote_path: ${{ secrets.TESTING_REMOTE_PATH }}
+    #     remote_host: ${{ secrets.TESTING_REMOTE_HOST }}
+    #     remote_user: ${{ secrets.TESTING_REMOTE_USER }}
+    #     remote_key: ${{ secrets.TESTING_DEPLOY_KEY }}
